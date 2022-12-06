@@ -52,8 +52,10 @@ public class BinarySearch {
         int low = 0;
         int high = intArray.length - 1;
         int mid = (low + high)/2;
+        int index = -1;
         while (low <= high) {
             if (intArray[mid] == userTarget) {
+                index = mid;
                 break;
             } else if (intArray[mid] < userTarget) {
                 low = mid + 1;
@@ -62,12 +64,31 @@ public class BinarySearch {
             }
             mid = (low + high)/2;
         }
-        System.out.println("Target int " + userTarget + " was found at array index " + mid + ".");
+        if (index >= 0) {
+            System.out.println("Target int " + userTarget + " was found at array index " + index + ".");
+        } else {
+            System.out.println("Target int " + userTarget + " was not found.");
+        }
         chooseBinarySearchType();
     }
 
     public void recursiveSearch() {
         // TODO - recursive search logic
+        /*System.out.println("\nRecursive Method");
+        int userTarget = getUserTargetInt();
+        int[] intArray = uniqueIntArrayGenerator(userTarget);
+
+        int low = 0;
+        int high = intArray.length - 1;
+
+        if (high >= low) {
+            int mid = (low + (high - low))/2;
+            if (intArray[mid] == userTarget) {
+                return mid;
+            } else if (intArray[mid] > userTarget) {
+                return;
+            }
+        }*/
     }
 
     public void arraysBinarySearch() {
@@ -78,10 +99,10 @@ public class BinarySearch {
     public int[] uniqueIntArrayGenerator(int targetToHide) {
         Random random = new Random();
         Set<Integer> randomIntSet = new HashSet<>();
-        randomIntSet.add(targetToHide);
         int numOfInts = random.nextInt(10, 21);
-        System.out.println("Array size: " + numOfInts);
-        for (int i = 1; i < numOfInts; i++) {
+        int[] randomArray = new int[numOfInts];
+        randomIntSet.add(targetToHide);
+        for (int i = 0; i < numOfInts; i++) {
             boolean isDuplicate = true;
             while (isDuplicate) {
                 int randomInt = random.nextInt(1, 100);
@@ -91,7 +112,7 @@ public class BinarySearch {
                 }
             }
         }
-        int[] randomArray = new int[numOfInts];
+        System.out.println("Array size: " + randomArray.length);
         int count = 0;
         for (int i : randomIntSet) {
             randomArray[count] = i;
